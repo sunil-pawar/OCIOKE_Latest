@@ -7,6 +7,7 @@ provider "helm" {
 provider "kubernetes" {
  
     config_path = "${path.module}/kubeconfig"
+   # load_config_file = false
   
 }
 
@@ -23,6 +24,7 @@ resource "kubernetes_namespace" "monitoringns" {
 
     name = "prometheus-monitoring"
   }
+  depends_on = [oci_containerengine_cluster.k8s_cluster, oci_containerengine_node_pool.k8s_node_pool]
 }
 
 /*resource "helm_release" "nginx_ingress" {
@@ -38,14 +40,15 @@ resource "kubernetes_namespace" "monitoringns" {
 }
 */
 resource "null_resource" "helm" {
-  triggers = {
+ /* triggers = {
       trigger = file("${path.module}/helmcommands.ps1")
-      trigger = timestamp()
-  }
+     # trigger = timestamp()
+  }*/
   provisioner "local-exec" {
-    command = "${path.module}/helmcommands.ps1"
+    command = "powershell -file ${path.module}/helmcommands.ps1 -helm_path ${var.helm_path}"
     
-    interpreter = ["PowerShell", "-File"]
+    #interpreter = ["PowerShell", "-File"]
   }
+  depends_on = [oci_containerengine_node_pool.k8s_node_pool, oci_containerengine_cluster.k8s_cluster, kubernetes_namespace.monitoringns]
 }
 

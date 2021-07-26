@@ -9,3 +9,4 @@ $env:TF_VAR_region  = "us-ashburn-1"
   
 ### Compartment
 $env:TF_VAR_compartment_ocid  = "ocid1.compartment.oc1..aaaaaaaae5qhsooxnfedbsbmohy5cibfg7fnyysxhodbrnva53wqaqf3z5aa"
+$env:TF_VAR_helm_path = "D:\D\E\TerraformStuff\OCIOKE\helm.exe"

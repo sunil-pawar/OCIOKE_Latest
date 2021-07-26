@@ -1,4 +1,5 @@
 variable "tenancy_ocid" {}
+variable "helm_path" {}
  
 variable "user_ocid" {}
 variable "fingerprint" {}
