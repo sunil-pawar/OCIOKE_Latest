@@ -6,11 +6,18 @@ provider "helm" {
 
 provider "kubernetes" {
  
-    config_path = "${path.module}/kubeconfig"
+    #config_path = "${path.module}/kubeconfig"
    # load_config_file = false
+   config_path = local_file.kubeconfig.filename
   
 }
 
+resource "time_sleep" "wait_2_min" {
+
+depends_on = [oci_containerengine_cluster.k8s_cluster, oci_containerengine_node_pool.k8s_node_pool]
+ create_duration = "2m"
+
+}
 
 resource "kubernetes_namespace" "monitoringns" {
   metadata {
@@ -24,7 +31,8 @@ resource "kubernetes_namespace" "monitoringns" {
 
     name = "prometheus-monitoring"
   }
-  depends_on = [oci_containerengine_cluster.k8s_cluster, oci_containerengine_node_pool.k8s_node_pool]
+  #depends_on = [oci_containerengine_cluster.k8s_cluster, oci_containerengine_node_pool.k8s_node_pool]
+  depends_on = [time_sleep.wait_2_min]
 }
 
 /*resource "helm_release" "nginx_ingress" {
