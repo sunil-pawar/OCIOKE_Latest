@@ -12,8 +12,8 @@
 3. Edit the env_var.ps1 file with the values from the step 3 from prerequisites
 4. Update the variables.tf file as required 
 5. execute commands
-  a. .\env_var.ps1
-  b. terraform init
-  c. terraform plan
-  d. terraform apply
+  1. .\env_var.ps1
+  2. terraform init
+  3. terraform plan
+  4. terraform apply
 
