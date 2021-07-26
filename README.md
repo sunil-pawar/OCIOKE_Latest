@@ -9,8 +9,8 @@
 ## Steps to deploy
 1. Download the content of this repository
 2. Download the repository
-3. Edit the env_var.ps1 file with the values from the step 3 from prerequisites
-4. Update the variables.tf file as required 
+3. Edit the env_var.ps1 file with the values from the step 1-4 from prerequisites
+4. Update the variables.tf file as required mainly the public sshkey that was generated from step 4 of prereqisites
 ###  Execute commands
     1. .\env_var.ps1
     2. terraform init
